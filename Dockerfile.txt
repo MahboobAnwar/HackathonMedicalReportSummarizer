@@ -18,3 +18,4 @@ ENV PYTHONUNBUFFERED=1
 
 # Run app.py when the container launches
 CMD ["python", "your_main_script.py"]
+Expose 3306
