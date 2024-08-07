@@ -1,10 +1,10 @@
 import gradio as gr
 from pdfminer.high_level import extract_text
 from ai71 import AI71
-import os
 
 AI71_API_KEY = "ai71-api-170ace63-2fad-4f62-82e1-2d35628dd980"
 client = AI71(AI71_API_KEY)
+
 
 
 def extract_text_from_pdf(file):
@@ -106,6 +106,7 @@ upload_interface = gr.Interface(
     outputs=[
         gr.Textbox(label="Extracted Text"),
         gr.Textbox(label="Summary"),
+
     ],
     allow_flagging='never',
     title="Medical Report Summarizer with Falcon 2",
@@ -118,6 +119,7 @@ chat_interface = gr.Interface(
         gr.State(),  # chat history
         gr.Textbox(label="Your Message"),
         gr.Textbox(label="Extracted Text")  # Add extracted text as input
+
     ],
     allow_flagging='never',
     outputs=[
@@ -132,8 +134,5 @@ chat_interface = gr.Interface(
 iface = gr.TabbedInterface([upload_interface, chat_interface], ["Upload PDF", "Chat with Falcon"])
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 7860))  # Use the PORT environment variable set by Render
-    iface.launch(server_name="0.0.0.0", server_port=port)
 
-# Export Gradio app as Flask app
-app = gr.mount_gradio_app(gr.Flask(__name__), iface, path="/")
+    iface.launch()
