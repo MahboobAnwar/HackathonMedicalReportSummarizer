@@ -1,4 +1,5 @@
-﻿accelerate==0.33.0
+pywinpty==0.5.7
+accelerate==0.33.0
 ai71==0.0.18
 aiofiles==23.2.1
 annotated-types==0.7.0
@@ -111,7 +112,6 @@ python-json-logger==2.0.7
 python-multipart==0.0.9
 pytz==2024.1
 pypiwin32
-pywinpty==2.0.13
 PyYAML==6.0.1
 pyzmq==26.0.3
 qtconsole==5.5.2
