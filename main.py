@@ -6,9 +6,11 @@ import os
 AI71_API_KEY = "ai71-api-170ace63-2fad-4f62-82e1-2d35628dd980"
 client = AI71(AI71_API_KEY)
 
+
 def extract_text_from_pdf(file):
     text = extract_text(file.name)
     return text
+
 
 def summarize_text(text):
     try:
@@ -67,6 +69,7 @@ Here is the medical report:
         print(f"Error: {e}")  # Log the error
         return f"An error occurred: {e}"
 
+
 def chat_with_falcon(chat_history, user_message, extracted_text):
     if chat_history is None:
         chat_history = []
@@ -89,10 +92,12 @@ def chat_with_falcon(chat_history, user_message, extracted_text):
 
     return chat_history, formatted_history
 
+
 def process_pdf(file):
     extracted_text = extract_text_from_pdf(file)
     summary = summarize_text(extracted_text)
     return extracted_text, summary
+
 
 # Create the Gradio interface
 upload_interface = gr.Interface(
@@ -129,3 +134,6 @@ iface = gr.TabbedInterface([upload_interface, chat_interface], ["Upload PDF", "C
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 7860))  # Use the PORT environment variable set by Render
     iface.launch(server_name="0.0.0.0", server_port=port)
+
+# Export Gradio app as Flask app
+app = gr.mount_gradio_app(gr.Flask(__name__), iface, path="/")
